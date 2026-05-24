@@ -1,0 +1,66 @@
+services:
+
+  # ── PostgreSQL ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-attendance_db}
+      POSTGRES_USER: ${POSTGRES_USER:-attendance_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-attendance_user} -d ${POSTGRES_DB:-attendance_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── Schema migration (runs once then exits) ──────────────────────────────────
+  migrate:
+    image: postgres:16-alpine
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    command: >
+      psql
+        -h postgres
+        -U ${POSTGRES_USER:-attendance_user}
+        -d ${POSTGRES_DB:-attendance_db}
+        -f /migrations/001_initial_schema.sql
+    volumes:
+      - ./attendance-server/migrations:/migrations:ro
+    restart: "no"
+
+  # ── API server ───────────────────────────────────────────────────────────────
+  server:
+    build: ./attendance-server
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-attendance_user}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-attendance_db}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      JWT_ACCESS_TTL_MINUTES: ${JWT_ACCESS_TTL_MINUTES:-15}
+      JWT_REFRESH_TTL_DAYS: ${JWT_REFRESH_TTL_DAYS:-7}
+      QR_HMAC_SECRET: ${QR_HMAC_SECRET}
+      DEVICE_ENCRYPTION_KEY: ${DEVICE_ENCRYPTION_KEY}
+      ADMIN_STORE_URL: ${ADMIN_STORE_URL:-}
+      ADMIN_STORE_API_KEY: ${ADMIN_STORE_API_KEY:-}
+      CORS_ORIGIN: http://localhost
+    ports:
+      - "3000:3000"
+
+  # ── Web portal (React + nginx) ───────────────────────────────────────────────
+  web:
+    build: ./attendance-web
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:

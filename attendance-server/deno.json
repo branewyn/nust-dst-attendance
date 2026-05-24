@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "dev": "deno run --watch --allow-net --allow-env --allow-read src/main.ts",
+    "start": "deno run --allow-net --allow-env --allow-read src/main.ts",
+    "seed-admin": "deno run --allow-net --allow-env --allow-read scripts/seed-admin.ts"
+  },
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@^17",
+    "@db/postgres": "jsr:@db/postgres@^0.19",
+    "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3",
+    "@std/encoding": "jsr:@std/encoding@^1",
+    "@std/dotenv": "jsr:@std/dotenv@^0.224",
+    "bcryptjs": "npm:bcryptjs@^2.4.3",
+    "pdf-lib": "npm:pdf-lib@^1.17.1"
+  }
+}

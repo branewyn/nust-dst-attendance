@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "NUST Attendance",
+    "slug": "attendance-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android"],
+    "android": {
+      "package": "na.nust.attendance"
+    },
+    "ios": {
+      "bundleIdentifier": "na.nust.attendance"
+    },
+    "plugins": [
+      ["expo-camera", { "cameraPermission": "Allow NUST Attendance to access your camera to scan QR codes." }],
+      ["expo-location", { "locationWhenInUsePermission": "Allow NUST Attendance to access your location to record your attendance position." }]
+    ],
+    "extra": {
+      "apiUrl": "http://localhost:3000/api/v1"
+    }
+  }
+}
