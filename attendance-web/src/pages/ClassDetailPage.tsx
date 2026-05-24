@@ -23,8 +23,8 @@ export default function ClassDetailPage() {
 
   const downloadPdf = async () => {
     if (!id) return;
-    const blob = await classesApi.downloadReport(id);
-    const url = URL.createObjectURL(blob);
+    const response = await classesApi.downloadReport(id);
+    const url = URL.createObjectURL(response.data as Blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = `attendance_${cls?.class_code ?? id}.pdf`;
@@ -69,7 +69,7 @@ export default function ClassDetailPage() {
           <div style={styles.section}>
             <div style={styles.sectionHeader}>
               <h3 style={styles.sectionTitle}>
-                Attendance ({attendance?.total_records ?? 0} records
+                Attendance ({attendance?.total_attended ?? 0} records
                 {attendance?.flagged_count ? `, ${attendance.flagged_count} flagged` : ""})
               </h3>
               <label style={{ fontSize: 13, color: "#64748b" }}>

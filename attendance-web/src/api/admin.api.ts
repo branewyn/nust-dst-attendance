@@ -22,8 +22,13 @@ export const listAllClasses = () =>
 export const getClassAttendance = (classId: string) =>
   api.get<{ records: AttendanceRecord[] }>(`/admin/classes/${classId}/attendance`);
 
-export const listAllAttendance = (classId?: string) =>
-  api.get<{ records: AttendanceRecord[] }>(`/admin/attendance${classId ? `?class_id=${classId}` : ""}`);
+export const listAllAttendance = (params?: { classId?: string; flaggedOnly?: boolean }) => {
+  const qs = new URLSearchParams();
+  if (params?.classId) qs.set("class_id", params.classId);
+  if (params?.flaggedOnly) qs.set("flagged", "true");
+  const q = qs.toString();
+  return api.get<{ records: AttendanceRecord[] }>(`/admin/attendance${q ? `?${q}` : ""}`);
+};
 
 export const listPushLogs = () =>
   api.get<{ logs: PushLog[] }>("/admin/push-logs");

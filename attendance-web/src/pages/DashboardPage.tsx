@@ -7,7 +7,6 @@ export default function DashboardPage() {
   const { classes, loading } = useClasses();
 
   const upcoming = classes.filter((c) => new Date(c.scheduled_at) >= new Date());
-  const totalFlagged = 0; // placeholder — fetched per-class
 
   return (
     <div style={styles.page}>

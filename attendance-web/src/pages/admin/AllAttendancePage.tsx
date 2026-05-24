@@ -8,7 +8,7 @@ export default function AllAttendancePage() {
   const [flaggedOnly, setFlaggedOnly] = useState(false);
 
   useEffect(() => {
-    adminApi.listAllAttendance({ flaggedOnly }).then((r) => setRecords(r.data.records)).finally(() => setLoading(false));
+    adminApi.listAllAttendance({ flaggedOnly }).then((r) => setRecords(r.data.records ?? [])).finally(() => setLoading(false));
   }, [flaggedOnly]);
 
   return (

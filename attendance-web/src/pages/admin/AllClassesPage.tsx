@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import * as adminApi from "../../api/admin.api.ts";
 import type { AdminClass } from "../../types/index.ts";
 

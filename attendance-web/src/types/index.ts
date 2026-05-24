@@ -27,6 +27,7 @@ export interface ClassItem {
 }
 
 export interface AttendanceRecord {
+  id: string;
   student_id: string;
   full_name: string;
   student_number: string;
@@ -37,6 +38,9 @@ export interface AttendanceRecord {
   os: string;
   flagged: boolean;
   flag_reason: string | null;
+  // admin all-attendance endpoint includes these
+  subject_name?: string;
+  class_code?: string;
 }
 
 export interface AttendanceList {
@@ -57,6 +61,7 @@ export interface AdminClass {
   scheduled_at: string;
   lecturer_name: string;
   total_attended: number;
+  attendance_count: number;
   flagged_count: number;
 }
 

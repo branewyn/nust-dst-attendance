@@ -20,12 +20,12 @@ export default function PushLogsPage() {
           </thead>
           <tbody>
             {logs.map((l) => (
-              <tr key={l.id} style={!l.success ? { background: "rgb(255,245,245)" } : undefined}>
+              <tr key={l.id} style={l.status === "FAILED" ? { background: "rgb(255,245,245)" } : undefined}>
                 <td style={styles.td}>{l.class_id}</td>
                 <td style={styles.td}>{new Date(l.pushed_at).toLocaleString()}</td>
                 <td style={styles.td}>{l.http_status ?? "—"}</td>
-                <td style={{ ...styles.td, color: l.success ? "#16a34a" : "#ef4444" }}>{l.success ? "Yes" : "No"}</td>
-                <td style={styles.td}>{l.error_message ?? "—"}</td>
+                <td style={{ ...styles.td, color: l.status === "SUCCESS" ? "#16a34a" : "#ef4444" }}>{l.status === "SUCCESS" ? "Yes" : "No"}</td>
+                <td style={styles.td}>—</td>
               </tr>
             ))}
           </tbody>
