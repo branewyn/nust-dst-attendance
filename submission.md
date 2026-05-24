@@ -209,7 +209,7 @@ The prototype was reviewed internally by the group and demonstrated to two stude
 | Member | Student Number | Role |
 |---|---|---|
 | Brandon Cockrell | 217149413 | Frontend Development, Mobile App, Web Portal |
-| Carlito De Almeida | — | Project Lead, Backend Architecture, Research |
+| Carlito De Almeida | 225164159 | Project Lead, Backend Architecture, Research |
 
 ---
 
