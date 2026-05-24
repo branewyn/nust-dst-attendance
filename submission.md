@@ -7,7 +7,7 @@
 
 ## 1. Problem Statement
 
-Attendance tracking at tertiary institutions is largely manual. Lecturers pass around paper registers, call out names, or rely on students to sign in — processes that are slow, error-prone, and easy to manipulate. Students can sign in for absent peers. Records get lost. Disputes arise with no reliable audit trail.
+Attendance tracking at tertiary institutions is largely manual. Lecturers pass around paper registers, call out names, or rely on students to sign in — processes that are slow, error-prone, and easy to manipulate.
 
 This problem affects:
 - **Students** — who may be marked absent despite attending, with no way to prove otherwise
@@ -138,6 +138,30 @@ The prototype is a working three-component system:
 - Duplicate submission prevention (`UNIQUE` constraint per student per class)
 
 See `architecture.md` for the full technical specification.
+
+### Screenshots — Student Mobile App
+
+**Login Screen**
+![Mobile Login](assets/screenshots/mobile-login.png)
+
+**Student Dashboard** — overall attendance, enrolled courses, and quick mark buttons
+![Mobile Dashboard](assets/screenshots/mobile-dashboard.png)
+
+**QR Scan Screen** — live camera, location verified, current session shown
+![Mobile QR Scan](assets/screenshots/mobile-qr-scan.png)
+
+---
+
+### Screenshots — Lecturer Web Portal
+
+**Attendance Dashboard** — overall stats, at-risk students, session timeline heatmaps
+![Web Attendance Dashboard](assets/screenshots/web-attendance-dashboard.png)
+
+**Live Session / QR Generation** — signed QR code displayed for students to scan, live attendance counter
+![Web QR Generation](assets/screenshots/web-qr-generation.png)
+
+**PDF Attendance Report** — exported report with student records, attendance percentages, and at-risk flags
+![Web PDF Report](assets/screenshots/web-pdf-report.png)
 
 ---
 
