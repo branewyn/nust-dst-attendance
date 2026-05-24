@@ -206,10 +206,10 @@ The prototype was reviewed internally by the group and demonstrated to two stude
 
 ## 8. Team Roles
 
-| Member | Role |
-|---|---|
-| Carlito De Almeida | Project Lead, Backend Architecture, Research |
-| *(add team members)* | *(add roles)* |
+| Member | Student Number | Role |
+|---|---|---|
+| Brandon Cockrell | 217149413 | Frontend Development, Mobile App, Web Portal |
+| Carlito De Almeida | — | Project Lead, Backend Architecture, Research |
 
 ---
 
